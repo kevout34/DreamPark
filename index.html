@@ -86,6 +86,8 @@ p{margin:0}
 .stack{position:relative}
 .stack .b{position:absolute;width:38%;right:-3%;bottom:-12%;border:6px solid var(--pine);box-shadow:0 24px 50px rgba(0,0,0,.45)}
 .stack.l .b{right:auto;left:-3%}
+.stack.flow{display:grid;gap:14px;margin-bottom:0}
+.stack.flow .b{position:static;width:100%;right:auto;left:auto;bottom:auto;border:0;box-shadow:none}
 .ar-43{aspect-ratio:4/3}.ar-32{aspect-ratio:3/2}.ar-169{aspect-ratio:16/9}.ar-45{aspect-ratio:4/5}.ar-23{aspect-ratio:2/3}
 .cabin-scene{min-height:88svh;display:flex;align-items:flex-end;padding-block:120px 64px}
 .cabin-scene .shade{background:linear-gradient(to top,rgba(11,16,14,.92) 8%,rgba(11,16,14,.1) 65%)}
@@ -324,9 +326,9 @@ p{margin:0}
 
 <section class="band alt" id="snack">
   <div class="in split flip">
-    <div class="stack l" style="order:2">
-      <figure class="frame ar-43 wipe"><img src="img/interior.jpg" alt="Open shipping container with a counter and bar stools" width="942" height="706" loading="lazy"></figure>
-      <figure class="frame b ar-43" data-speed="-0.04"><img src="img/trailer.jpg" alt="White restroom trailer with steps" width="638" height="480" loading="lazy"></figure>
+    <div class="stack l flow" style="order:2">
+      <figure class="frame ar-43"><img src="img/interior.jpg" alt="Open shipping container with a counter and bar stools" width="942" height="706" loading="lazy"></figure>
+      <figure class="frame b ar-43"><img src="img/trailer.jpg" alt="White restroom trailer with steps" width="638" height="480" loading="lazy"></figure>
     </div>
     <div style="order:1">
       <h2 class="h2 rv">Snack Bar</h2>
@@ -495,7 +497,7 @@ p{margin:0}
           <p class="lead" style="margin-bottom:16px">These three years cover:</p>
           <ul class="gl">
             <li>Investor provides $350k capital.</li>
-            <li>Site Developments Progress.</li>
+            <li>Land infastructure develops.</li>
             <li>Business establishes operations.</li>
             <li>Investor equity remains at 20%.</li>
           </ul>
