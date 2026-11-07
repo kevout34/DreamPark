@@ -1,0 +1,611 @@
+<title>DreamPark Business Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=JetBrains+Mono:wght@400;500&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout concept: a night descent in acts. Full-bleed photo scenes that parallax and pin, with plain data bands between them. */
+:root{
+  --ink:#0b100e; --pine:#121c17; --bone:#ece7da; --fog:#a9b7ad; --amber:#ffb552; --moss:#49b283;
+  --line:rgba(236,231,218,.18); --veil:rgba(11,16,14,.62);
+  --display:'Big Shoulders Display','Arial Narrow',Impact,sans-serif;
+  --body:'Public Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--bone);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3{font-family:var(--display);text-transform:uppercase;font-weight:800;line-height:.92;letter-spacing:.01em;margin:0;text-wrap:balance}
+p{margin:0}
+.in{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.slate{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.slate::before{content:"";width:34px;height:1px;background:var(--amber)}
+.h2{font-size:clamp(52px,9vw,128px)}
+.h3{font-size:clamp(40px,6vw,84px)}
+.lead{font-size:clamp(18px,2.1vw,24px);line-height:1.5;color:var(--bone);max-width:34em}
+.body{color:var(--fog);max-width:32em}
+.mono{font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--fog)}
+.tn{font-variant-numeric:tabular-nums}
+
+/* top bar */
+.top{position:fixed;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;justify-content:space-between;
+  padding:calc(12px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 18px max(16px,env(safe-area-inset-left,0px));
+  background:linear-gradient(to bottom,rgba(11,16,14,.78),rgba(11,16,14,0))}
+.top img{height:22px;width:auto}
+.top a{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--bone);text-decoration:none;opacity:.8}
+.top a:focus-visible{outline:2px solid var(--amber);outline-offset:4px}
+#sp{position:fixed;left:0;right:0;top:0;height:3px;z-index:30;background:var(--amber);transform-origin:left;transform:scaleX(var(--sp,0))}
+
+/* scenes */
+.scene{position:relative;overflow:hidden;isolation:isolate}
+.px{position:absolute;inset:-16% 0;z-index:-2;will-change:transform}
+.px img{width:100%;height:100%;object-fit:cover}
+.shade{position:absolute;inset:0;z-index:-1}
+.hero{min-height:92svh;display:flex;align-items:flex-start;padding-block:clamp(88px,18svh,200px) 72px}
+.hero .shade{background:linear-gradient(to bottom,rgba(11,16,14,.7),rgba(11,16,14,.3) 55%,rgba(11,16,14,.8))}
+.hero .px img{animation:kb 30s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.14)}}
+.hero .logo{width:clamp(220px,42vw,460px);height:auto;margin-bottom:18px}
+.hero h1{font-size:clamp(64px,14vw,200px)}
+.load{display:flex;align-items:center;gap:14px;margin-top:26px}
+.load .track{width:min(240px,50vw);height:3px;background:var(--line);overflow:hidden}
+.load .fill{height:100%;background:var(--moss);animation:fill 3.4s ease-in-out infinite}
+@keyframes fill{0%{width:6%}70%{width:100%}100%{width:100%}}
+.cue{position:absolute;right:max(16px,env(safe-area-inset-right,0px));bottom:36px;writing-mode:vertical-rl;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--fog)}
+.cue::after{content:"";display:block;width:1px;height:48px;background:var(--fog);margin:12px auto 0;animation:drop 2s ease-in-out infinite;transform-origin:top}
+@keyframes drop{0%{transform:scaleY(0)}60%{transform:scaleY(1)}100%{transform:scaleY(1);opacity:0}}
+
+.mission{min-height:100svh;display:flex;align-items:center;padding-block:120px}
+.mission .shade{background:linear-gradient(100deg,rgba(11,16,14,.86) 12%,rgba(11,16,14,.25) 75%)}
+.mission .h2{margin-bottom:28px;max-width:9em}
+
+/* pinned scenes */
+.pin{position:relative;height:240svh}
+.stage{position:sticky;top:0;height:100svh;overflow:hidden;isolation:isolate}
+.stage .layer{position:absolute;inset:0;z-index:-2}
+.stage .layer img{width:100%;height:100%;object-fit:cover}
+.stage .cap{position:absolute;left:0;right:0;bottom:0;padding-bottom:max(56px,env(safe-area-inset-bottom,0px));transform:translateY(calc(var(--p,0)*-22px))}
+.stage .shade{background:linear-gradient(to top,rgba(11,16,14,.9) 6%,rgba(11,16,14,0) 62%)}
+.tow .layer img{position:absolute;inset:0}
+.tow .layer img.fill{filter:blur(32px) brightness(.5) saturate(1.2);transform:scale(1.25)}
+.tow .layer img.main{transform:scale(calc(1 + var(--p,0)*.22));transform-origin:50% 62%}
+@media (min-aspect-ratio:1/1){.tow .layer img.main{object-fit:contain;object-position:78% 50%}}
+.tow .shade{background:linear-gradient(to top,rgba(11,16,14,.9) 6%,rgba(11,16,14,.1) 62%)}
+.lights .day{filter:brightness(calc(1 - var(--p,0)*.55)) saturate(calc(1 - var(--p,0)*.4))}
+.lights .night{opacity:calc(var(--p,0)*1.7 - .35)}
+.lights .glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 50% at 45% 30%,rgba(255,181,82,.28),transparent 70%);opacity:calc(var(--p,0)*1.4 - .3);mix-blend-mode:screen}
+
+/* data bands + photo grids */
+.band{padding-block:clamp(72px,11vw,150px);background:var(--ink)}
+.band.alt{background:var(--pine)}
+.split{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,5vw,80px);align-items:center}
+.split>*{min-width:0}
+.split.flip{grid-template-columns:minmax(0,6fr) minmax(0,5fr)}
+.frame{position:relative;overflow:hidden;margin:0}
+.frame img{width:100%;height:100%;object-fit:cover}
+.stack{position:relative}
+.stack .b{position:absolute;width:38%;right:-3%;bottom:-12%;border:6px solid var(--pine);box-shadow:0 24px 50px rgba(0,0,0,.45)}
+.stack.l .b{right:auto;left:-3%}
+.ar-43{aspect-ratio:4/3}.ar-32{aspect-ratio:3/2}.ar-169{aspect-ratio:16/9}.ar-45{aspect-ratio:4/5}.ar-23{aspect-ratio:2/3}
+.cabin-scene{min-height:88svh;display:flex;align-items:flex-end;padding-block:120px 64px}
+.cabin-scene .shade{background:linear-gradient(to top,rgba(11,16,14,.92) 8%,rgba(11,16,14,.1) 65%)}
+.cabin-scene .px img{object-position:50% 40%}
+.cabin-scene .inset{position:absolute;right:max(16px,env(safe-area-inset-right,0px));top:120px;width:clamp(110px,16vw,210px);border:1px solid var(--line);z-index:1}
+.cabin-scene .inset img{aspect-ratio:4/5;object-fit:cover;width:100%}
+
+.marquee{overflow:hidden;border-block:1px solid var(--line);padding-block:18px;background:var(--ink)}
+.marquee .track{display:flex;gap:48px;width:max-content;animation:mq 34s linear infinite}
+.marquee span{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(32px,5vw,64px);line-height:1;white-space:nowrap;color:var(--bone)}
+.marquee span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--fog)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.events{min-height:92svh;display:flex;align-items:flex-end;padding-block:120px 64px}
+.events .shade{background:linear-gradient(to top,rgba(11,16,14,.92) 6%,rgba(11,16,14,.15) 60%)}
+
+#family .in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);grid-template-rows:auto auto 1fr;column-gap:clamp(28px,5vw,80px);align-items:start}
+#family .in>*{min-width:0}
+#family .in>h2,#family .in>p{grid-column:1}
+.trio{grid-column:2;grid-row:1 / span 3;display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.trio figure{margin:0}
+.trio img{width:100%;aspect-ratio:3/2;object-fit:cover}
+.trio .t2 img{object-position:50% 60%}
+
+.market{padding-block:clamp(72px,11vw,150px)}
+.market .shade{background:linear-gradient(to bottom,rgba(11,16,14,.9),rgba(11,16,14,.66) 40%,rgba(11,16,14,.92))}
+.big{font-family:var(--display);font-weight:900;line-height:.85;font-size:clamp(64px,14vw,200px);color:var(--amber);letter-spacing:.005em}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);margin-top:clamp(36px,5vw,64px)}
+.cols>*{min-width:0}
+.rows{display:grid;gap:14px;margin:0;padding:0;list-style:none}
+.rows li{display:grid;grid-template-columns:minmax(0,9.5em) minmax(0,1fr) 3.2em;gap:12px;align-items:center;font-size:15px}
+.rows .t{height:10px;background:var(--line);overflow:hidden}
+.rows .t i{display:block;height:100%;width:var(--w);background:var(--amber);transform-origin:left}
+.rows b{font-family:var(--mono);font-weight:500;font-size:13px;text-align:right}
+.pills{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:14px 0 0;padding:0}
+.pills li{border:1px solid var(--line);padding:6px 12px;font-size:14px;color:var(--bone)}
+.coord{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:28px}
+.mapfig{margin:clamp(40px,6vw,80px) auto 0;max-width:1000px;border:1px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.45);background:var(--ink)}
+.mapfig img{width:100%;height:auto;aspect-ratio:1800/1603}
+@media (max-width:820px){.mapfig{margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));max-width:none;border-inline:0}}
+
+.chart{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,2vw,28px);align-items:end;height:340px;border-bottom:1px solid var(--line)}
+.col{display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-width:0}
+.col .v{font-family:var(--mono);font-size:clamp(11px,1.8vw,15px);margin-bottom:8px;white-space:nowrap}
+.col .bar{height:calc((100% - 30px)*var(--h));background:linear-gradient(to top,rgba(255,181,82,.5),var(--amber));transform-origin:bottom}
+.yrs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,2vw,28px);margin-top:10px}
+.yrs span{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:20px;letter-spacing:.04em}
+
+.tier{padding-block:22px;border-top:1px solid var(--line)}
+.tier h3{font-size:clamp(28px,4vw,44px);margin-bottom:14px}
+.tier .rows li{grid-template-columns:minmax(0,13em) minmax(0,1fr) 3.6em}
+
+.money{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,3vw,40px);margin-block:36px 44px}
+.money div{border-top:2px solid var(--line);padding-top:14px}
+.money div.hot{border-top-color:var(--amber)}
+.money .n{font-family:var(--display);font-weight:900;font-size:clamp(40px,8vw,112px);line-height:.9}
+.money .hot .n{color:var(--amber)}
+/* investor payout chart */
+.payout{margin:0}
+.payout .ph{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-bottom:clamp(36px,5vw,64px)}
+.payout .ph h3{font-size:clamp(30px,4.4vw,52px);margin-bottom:10px}
+.payout .ph .grace{border:1px solid var(--line);padding:clamp(18px,3vw,32px)}
+.payout .ph .grace p.note{color:var(--amber);font-family:var(--mono);font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.payout .steps{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,3vw,36px)}
+.payout .steps b{display:block;font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:24px;line-height:1.05;margin-bottom:6px}
+.payout .steps span{color:var(--fog);font-size:17px;line-height:1.45}
+.payout .gl{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.payout .gl li{position:relative;padding-left:26px;font-size:clamp(18px,2vw,22px);line-height:1.4}
+.payout .gl li::before{content:"";position:absolute;left:0;top:.5em;width:12px;height:12px;background:var(--amber)}
+.payout .legend{display:flex;flex-wrap:wrap;gap:10px 28px;margin:0 0 28px;padding:0;list-style:none;font-size:18px}
+.payout .legend li{display:flex;align-items:center;gap:10px}
+.payout .legend i{width:20px;height:20px;display:block}
+.payout .pr{background:var(--moss)}
+.payout .dv{background:var(--amber)}
+.payout .pyrs{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.payout .pyrs li{display:grid;grid-template-columns:6.7em minmax(0,1fr) 5em;align-items:center;gap:10px}
+.payout .y{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:24px;line-height:1;letter-spacing:.03em;white-space:nowrap}
+.payout .y small{display:block;font-family:var(--mono);font-weight:500;font-size:13px;letter-spacing:.02em;text-transform:none;color:var(--amber);margin-top:4px}
+.payout .bar{display:flex;height:34px;width:calc(var(--t) / 75 * 100%);min-width:0}
+.payout .bar .pr{flex:0 0 calc(35 / var(--t) * 100%)}
+.payout .bar .dv{flex:1 1 0}
+.payout .tot{font-family:var(--mono);font-weight:500;font-size:16px;text-align:right;font-variant-numeric:tabular-nums}
+.payout .foot{margin-top:22px;color:var(--fog);font-size:18px;max-width:34em}
+.payout .foot strong{color:var(--bone);font-weight:600}
+@media (min-width:821px){
+  .payout .ph{grid-template-columns:minmax(0,1fr)}
+  .payout .pyrs{grid-template-columns:repeat(10,minmax(0,1fr));align-items:end;gap:clamp(8px,1.6vw,22px);height:440px}
+  .payout .pyrs li{display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;gap:10px;height:100%}
+  .payout .tot{order:1;text-align:center;font-size:clamp(14px,1.5vw,19px)}
+  .payout .bar{order:2;flex-direction:column-reverse;width:100%;height:calc(var(--t) / 75 * 300px)}
+  .payout .bar .pr{flex:0 0 calc(35 / var(--t) * 100%)}
+  .payout .y{order:3;text-align:center;font-size:clamp(18px,2vw,26px);min-height:3.2em}
+  .payout .y small{font-size:clamp(11px,1.1vw,14px)}
+  .payout .pyrs{border-bottom:1px solid var(--line);padding-bottom:0}
+}
+@keyframes bgrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes bgrowy{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .payout .bar{transform-origin:left center;animation:bgrow linear both;animation-timeline:view();animation-range:entry 5% entry 60%}
+    @media (min-width:821px){.payout .bar{transform-origin:center bottom;animation-name:bgrowy}}
+  }
+}
+@media (max-width:820px){.payout .steps{grid-template-columns:minmax(0,1fr)}}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,4vw,56px);margin-top:36px}
+.two>div{border-left:2px solid var(--amber);padding-left:18px}
+.two h3{font-size:30px;margin-bottom:10px}
+.two p{color:var(--fog);font-size:16px}
+.two strong{color:var(--bone);font-weight:600}
+
+.ground{padding-block:clamp(96px,14vw,200px)}
+.ground .shade{background:linear-gradient(to bottom,rgba(11,16,14,.95),rgba(11,16,14,.55) 45%,rgba(11,16,14,.95))}
+.quote{font-size:clamp(56px,11vw,168px);max-width:9em;margin-bottom:14px}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,3vw,40px);margin-block:48px}
+.facts div{border-top:1px solid var(--line);padding-top:12px}
+.facts .n{font-family:var(--display);font-weight:900;font-size:clamp(36px,5.6vw,76px);line-height:.95;color:var(--amber)}
+.duo{display:grid;grid-template-columns:minmax(0,1fr);gap:14px}
+.duo figure{margin:0;position:relative;max-width:820px}
+.duo img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.duo figure.wide{max-width:none;width:100vw;margin-left:calc(50% - 50vw)}
+.duo figure.wide img{aspect-ratio:16/9;max-height:86svh}
+.duo figure.wide figcaption{left:max(16px,env(safe-area-inset-left,0px))}
+@media (max-width:820px){.duo figure.wide img{aspect-ratio:4/3;max-height:none}}
+.duo figcaption{position:absolute;left:0;bottom:0;padding:6px 12px;background:var(--veil);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.end{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding-block:120px}
+.end .px img{object-position:50% 55%}
+.end .shade{background:radial-gradient(70% 60% at 50% 50%,rgba(11,16,14,.45),rgba(11,16,14,.88))}
+.end .logo{width:clamp(180px,30vw,340px);height:auto;margin:0 auto 20px}
+.end h2{font-size:clamp(64px,16vw,220px)}
+
+/* scroll-driven entrances; everything is visible where unsupported */
+@keyframes rv{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes growy{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 5% entry 38%}
+    .grow{animation:grow linear both;animation-timeline:view();animation-range:entry 10% cover 34%}
+    .growy{animation:growy linear both;animation-timeline:view();animation-range:entry 10% cover 40%}
+    .wipe{animation:wipe linear both;animation-timeline:view();animation-range:entry 0% cover 38%}
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .hero .px img,.marquee .track,.load .fill,.cue::after{animation:none}
+  .pin{height:auto}.stage{position:relative}
+}
+
+@media (max-width:820px){
+  body{font-size:16px}
+  .split,.split.flip,.cols,.two{grid-template-columns:minmax(0,1fr)}
+  .stack .b{right:2%;bottom:-8%}
+  .stack.l .b{left:2%;right:auto}
+  .stack{margin-bottom:12%}
+  .facts,.money{grid-template-columns:minmax(0,1fr)}
+  #family .in{grid-template-columns:minmax(0,1fr);grid-template-rows:none}
+  #family .in>h2,#family .in>p,.trio{grid-column:1;grid-row:auto}
+  .trio{margin-top:36px}
+  .rows li{grid-template-columns:minmax(0,7.5em) minmax(0,1fr) 3em;font-size:14px}
+  .tier .rows li{grid-template-columns:minmax(0,8.5em) minmax(0,1fr) 3.2em}
+  .chart{height:300px}
+  .cue{display:none}
+  .cabin-scene .inset{display:none}
+}
+</style>
+
+<div id="sp" aria-hidden="true"></div>
+
+<main>
+<!-- Opening -->
+<section class="scene hero" id="top">
+  <div class="px" data-speed="0.12"><img src="img/oasis.jpg" alt="Rendering of a bike park with berms and jumps below mountains" width="2000" height="1116"></div>
+  <div class="shade"></div>
+  <div class="in">
+    <img class="logo" src="img/logo.png" alt="DreamPark" width="634" height="132">
+    <h1>Business Plan</h1>
+    <div class="load"><span class="mono">Bike Park Loading…</span><span class="track" aria-hidden="true"><span class="fill" style="display:block"></span></span></div>
+  </div>
+  <div class="cue">Scroll</div>
+</section>
+
+<section class="scene mission">
+  <div class="px" data-speed="0.1"><img src="img/hero.jpg" alt="Cleared site in tall pine forest" width="2000" height="1500" loading="lazy"></div>
+  <div class="shade"></div>
+  <div class="in">
+    <div class="slate rv">Our mission</div>
+    <h2 class="h2 rv">We aren’t just building a Bike Park.</h2>
+    <p class="lead rv">We’re creating a Mountain Bike Oasis, that lets you thrive from the moment you arrive! Our mission is to provide the most enjoyable riding experience possible.</p>
+  </div>
+</section>
+
+<!-- The ride -->
+<section class="pin tow" id="tow">
+  <div class="stage">
+    <div class="layer">
+      <img class="fill" src="img/tow.jpg" alt="" aria-hidden="true" width="1162" height="2048">
+      <img class="main" src="img/tow.jpg" alt="Rider’s view holding a blue tow rope up a forest trail" width="1162" height="2048">
+    </div>
+    <div class="shade"></div>
+    <div class="cap"><div class="in">
+      <div class="slate">The ride</div>
+      <h2 class="h2">Tow-Rope</h2>
+      <p class="lead" style="margin-top:20px">Tow-Ropes are a proven concept in the snowboard industry, but under-utilized in Commercial Bike Park applications. This zero-wait solution maximizes your time riding downhill, making laps highly repeatable and skill improvement second nature.  Having a Rope Tow sets us apart from the competition, and in a lane of our own.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="pin lights" id="lights">
+  <div class="stage">
+    <div class="layer day"><img src="img/day.jpg" alt="The trail network in daylight" width="1195" height="896" loading="lazy"></div>
+    <div class="layer night"><img src="img/night.jpg" alt="The same trail network lit by stadium lights at night" width="1195" height="896" loading="lazy"></div>
+    <div class="glow"></div>
+    <div class="shade"></div>
+    <div class="cap"><div class="in">
+      <div class="slate">After dark</div>
+      <h2 class="h2">Lights</h2>
+      <p class="lead" style="margin-top:20px">Ride the Park after Dark!  Stadium Lighting keeps the cash coming in day and night!  And what goes well with a night sesh? A camping spot to seal the deal..</p>
+    </div></div>
+  </div>
+</section>
+
+<!-- The stay -->
+<section class="band" id="camping">
+  <div class="in split">
+    <div>
+      <div class="slate rv">The stay</div>
+      <h2 class="h2 rv">Camping</h2>
+      <p class="lead rv" style="margin-top:24px">What’s better than shredding the park till closing?  Spending the night, then shredding again the next day!  We offer primitive camp sites in addition to our exclusive container cabins</p>
+    </div>
+    <div class="stack">
+      <figure class="frame ar-32 wipe"><img src="img/tents.jpg" alt="Tents and a mountain bike at a forest campsite" width="1000" height="667" loading="lazy"></figure>
+      <figure class="frame b ar-23" data-speed="-0.04"><img src="img/couple.jpg" alt="Couple beside a camper with bikes" width="728" height="1092" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="snack">
+  <div class="in split flip">
+    <div class="stack l" style="order:2">
+      <figure class="frame ar-43 wipe"><img src="img/interior.jpg" alt="Open shipping container with a counter and bar stools" width="942" height="706" loading="lazy"></figure>
+      <figure class="frame b ar-43" data-speed="-0.04"><img src="img/trailer.jpg" alt="White restroom trailer with steps" width="638" height="480" loading="lazy"></figure>
+    </div>
+    <div style="order:1">
+      <h2 class="h2 rv">Snack Bar</h2>
+      <p class="lead rv" style="margin-top:24px">Serving Coffee, Smoothies, and Healthy Snacks will keep our riders full as well as our pockets!</p>
+    </div>
+  </div>
+</section>
+
+<section class="scene cabin-scene" id="cabins">
+  <div class="px" data-speed="0.1"><img src="img/cabin.jpg" alt="Modified container cabin glowing in the forest" width="1024" height="495" loading="lazy"></div>
+  <div class="shade"></div>
+  <figure class="inset" data-speed="-0.05"><img src="img/cabin_in.jpg" alt="Cabin deck with two chairs" width="399" height="501" loading="lazy"></figure>
+  <div class="in">
+    <h2 class="h2 rv">Cabin Rentals</h2>
+    <p class="lead rv" style="margin-top:20px">For those who want to splurge, we offer extended stays in our Modified Container Cabins!</p>
+  </div>
+</section>
+
+<!-- Gather -->
+<section class="scene events" id="events">
+  <div class="px" data-speed="0.1"><img src="img/festival.jpg" alt="Crowd under string lights at an evening festival" width="1800" height="1007" loading="lazy"></div>
+  <div class="shade"></div>
+  <div class="in">
+    <div class="slate rv">Gather</div>
+    <h2 class="h2 rv">Events</h2>
+    <p class="lead rv" style="margin-top:20px">We will host recurring Mountain Bike Events that bring the community, industry, and athletes together.  Fun off the bike games, plus friendly competition in Big Air, Slalom Racing, and so much more!</p>
+  </div>
+</section>
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Big Air</span><span>Slalom Racing</span><span>Community</span><span>Industry</span><span>Athletes</span>
+    <span>Big Air</span><span>Slalom Racing</span><span>Community</span><span>Industry</span><span>Athletes</span>
+  </div>
+</div>
+
+<section class="band alt" id="family">
+  <div class="in">
+    <h2 class="h2 rv">Dog Park / Playground / Walking Trails</h2>
+    <p class="lead rv" style="margin-top:24px">With plenty of family friendly amenities, there's no reason your dog, kid, or significant other needs to be left behind.  You shred, they chill, everyone is welcome!</p>
+    <div class="trio">
+      <figure class="t1"><img class="ar-43" src="img/playground.jpg" alt="Log obstacle course playground" width="600" height="450" loading="lazy"></figure>
+      <figure class="t2"><img class="ar-23" src="img/dogtrail.jpg" alt="Walker and dog on a forest trail" width="415" height="739" loading="lazy"></figure>
+      <figure class="t3"><img class="ar-169" src="img/kids.jpg" alt="Kids laughing on mountain bikes" width="1000" height="571" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- Market -->
+<section class="scene market" id="market">
+  <div class="px" data-speed="0.08"><img src="img/satellite.jpg" alt="Satellite view of the property beside the highway" width="1920" height="1080" loading="lazy"></div>
+  <div class="shade"></div>
+  <div class="in">
+    <div class="slate rv">Location &amp; Market</div>
+    <p class="lead rv">Located within the West Coasts Mecca of Mountain Biking, we attract riders from the North, South, East and West!</p>
+    <div class="big tn rv" style="margin-top:28px"><span data-count="1000000">1,000,000</span></div>
+    <p class="lead rv" style="margin-top:10px">Mountain Bikers cross our path annually.</p>
+
+    <div class="cols">
+      <div>
+        <h3 class="h3 rv" style="margin-bottom:22px">Local Demand</h3>
+        <ul class="rows">
+          <li><span>Reno</span><span class="t"><i class="grow" style="--w:91.4%"></i></span><b>32%</b></li>
+          <li><span>Roseville / Sacramento</span><span class="t"><i class="grow" style="--w:77.1%"></i></span><b>27%</b></li>
+          <li><span>Truckee / Tahoe</span><span class="t"><i class="grow" style="--w:68.6%"></i></span><b>24%</b></li>
+          <li><span>Auburn</span><span class="t"><i class="grow" style="--w:25.7%"></i></span><b>9%</b></li>
+          <li><span>Nevada City / Grass Valley</span><span class="t"><i class="grow" style="--w:22.9%"></i></span><b>8%</b></li>
+        </ul>
+        <p class="mono" style="margin-top:14px">Share of visitors</p>
+      </div>
+      <div>
+        <h3 class="h3 rv" style="margin-bottom:22px">Additional Demand</h3>
+        <ul class="pills rv" style="margin-top:0">
+          <li>Bay Area</li><li>Santa Cruz</li><li>San Jose</li><li>Boise</li><li>L.A.</li>
+        </ul>
+        <p class="body rv" style="margin-top:28px">Bordering I-80, our property sits halfway between Donner Summit &amp; Sacramento.</p>
+        <div class="coord"><span class="mono">39.23119° N, 120.75741° W</span></div>
+      </div>
+    </div>
+    <figure class="mapfig">
+      <img src="img/map.png" alt="Map of Interstate 80 from Sacramento to Reno, Nevada. DreamPark is marked directly on I-80 in Baxter, California, between Auburn and Donner Summit. A small inset shows where this sits in Northern California." width="1800" height="1603" loading="lazy">
+    </figure>
+  </div>
+</section>
+
+<!-- Money -->
+<section class="band" id="income">
+  <div class="in">
+    <div class="slate rv">The money</div>
+    <h2 class="h2 rv">Income Streams</h2>
+    <div class="cols">
+      <div>
+        <p class="mono rv" style="margin-bottom:16px">Estimated revenue</p>
+        <div class="chart" role="img" aria-label="Estimated revenue by year: Year 1 187,750 dollars, Year 2 275,375, Year 3 355,650, Year 4 402,250">
+          <div class="col"><span class="v tn" data-count="187750" data-pre="$">$187,750</span><div class="bar growy" style="--h:.467"></div></div>
+          <div class="col"><span class="v tn" data-count="275375" data-pre="$">$275,375</span><div class="bar growy" style="--h:.685"></div></div>
+          <div class="col"><span class="v tn" data-count="355650" data-pre="$">$355,650</span><div class="bar growy" style="--h:.884"></div></div>
+          <div class="col"><span class="v tn" data-count="402250" data-pre="$">$402,250</span><div class="bar growy" style="--h:1"></div></div>
+        </div>
+        <div class="yrs"><span>Year 1</span><span>Year 2</span><span>Year 3</span><span>Year 4</span></div>
+      </div>
+      <div>
+        <p class="mono rv" style="margin-bottom:16px">Revenue by stream</p>
+        <ul class="rows">
+          <li><span>Camping / Cabins</span><span class="t"><i class="grow" style="--w:100%"></i></span><b>$75,000</b></li>
+          <li><span>Day Passes / Snack Bar</span><span class="t"><i class="grow" style="--w:80%"></i></span><b>$60,000</b></li>
+          <li><span>Lessons / Camps</span><span class="t"><i class="grow" style="--w:46.7%"></i></span><b>$35,000</b></li>
+          <li><span>Events / Sponsors</span><span class="t"><i class="grow" style="--w:23.7%"></i></span><b>$17,750</b></li>
+        </ul>
+        <p class="mono rv" style="margin-top:34px">Yearly increase of revenue caused by</p>
+        <ul class="pills rv">
+          <li>Word of mouth marketing</li><li>Social Media Virality</li><li>Enhanced SEO and Ad Campaigns</li><li>Growing Event / Camp Popularity</li><li>Updated Trails and Features</li><li>Additional Rental Fleet</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band alt" id="money">
+  <div class="in">
+    <h2 class="h2 rv">Start-Up Costs</h2>
+    <p class="lead rv" style="margin-top:22px">We are seeking <strong style="color:var(--amber);font-weight:600">350k</strong> of outside capital to fund this project</p>
+    <div class="cols" style="margin-top:44px">
+      <div>
+        <div class="tier">
+          <h3 class="rv">First 50k Investment</h3>
+          <ul class="rows">
+            <li><span>Marketing, Software, Subscriptions</span><span class="t"><i class="grow" style="--w:3.3%"></i></span><b>5k</b></li>
+            <li><span>Equipment Rental, Misc. Materials</span><span class="t"><i class="grow" style="--w:13.3%"></i></span><b>20k</b></li>
+            <li><span>Insurance, Staff, Misc. Overhead</span><span class="t"><i class="grow" style="--w:16.7%"></i></span><b>25k</b></li>
+          </ul>
+        </div>
+        <div class="tier">
+          <h3 class="rv">Next 150k Investment</h3>
+          <ul class="rows">
+            <li><span>Rope Tow, Power, lighting, well install, restrooms, Snack Bar/ office container</span><span class="t"><i class="grow" style="--w:100%"></i></span><b>150k</b></li>
+          </ul>
+        </div>
+        <div class="tier">
+          <h3 class="rv">Final 150k Investment</h3>
+          <ul class="rows">
+            <li><span>Rental E-Bike Fleet</span><span class="t"><i class="grow" style="--w:13.3%"></i></span><b>20k</b></li>
+            <li><span>Airbnb “Tiny home” Cabin</span><span class="t"><i class="grow" style="--w:86.7%"></i></span><b>130k</b></li>
+          </ul>
+        </div>
+      </div>
+      <div style="align-self:center">
+        <p class="h3 rv" style="font-family:var(--display);font-weight:800;text-transform:uppercase;line-height:.95">Majority of Investment funds go directly toward fixed assets</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="roi">
+  <div class="in">
+    <h2 class="h2 rv">Return On Investment</h2>
+    <div class="money">
+      <div><p class="mono">Principal returned</p><p class="n tn" data-count="350000" data-pre="$">$350,000</p></div>
+      <div class="hot"><p class="mono">Net profit</p><p class="n tn" data-count="220000" data-pre="$">$220,000</p></div>
+      <div><p class="mono">Total, ~63% ROI</p><p class="n tn" data-count="570000" data-pre="$">$570,000</p></div>
+    </div>
+    <figure class="payout">
+      <div class="ph">
+        <div class="grace">
+          <p class="note">Payments do not start yet</p>
+          <h3><span style="white-space:nowrap">Years 1-3:</span> Growth &amp; Grace Period</h3>
+          <p class="lead" style="margin-bottom:16px">These three years cover:</p>
+          <ul class="gl">
+            <li>Investor provides $350k capital.</li>
+            <li>Business develops product/market.</li>
+            <li>Business establishes operations.</li>
+            <li>Investor equity stays at 20%.</li>
+          </ul>
+        </div>
+      </div>
+      <h3 class="h3" style="margin-bottom:18px"><span style="white-space:nowrap">Years 4-13:</span> Payout Period</h3>
+      <ul class="legend">
+        <li><i class="pr"></i>Principal buyout</li>
+        <li><i class="dv"></i>Dividend payout</li>
+      </ul>
+      <ol class="pyrs" aria-label="Investor payout by year, in dollars">
+        <li style="--t:75"><span class="y">Year 4<small>20% equity</small></span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$75,000</b></li>
+        <li style="--t:71"><span class="y">Year 5</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$71,000</b></li>
+        <li style="--t:67"><span class="y">Year 6</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$67,000</b></li>
+        <li style="--t:63"><span class="y">Year 7</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$63,000</b></li>
+        <li style="--t:59"><span class="y">Year 8</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$59,000</b></li>
+        <li style="--t:55"><span class="y">Year 9</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$55,000</b></li>
+        <li style="--t:51"><span class="y">Year 10</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$51,000</b></li>
+        <li style="--t:47"><span class="y">Year 11</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$47,000</b></li>
+        <li style="--t:43"><span class="y">Year 12</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$43,000</b></li>
+        <li style="--t:39"><span class="y">Year 13<small>0% equity</small></span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$39,000</b></li>
+      </ol>
+      <p class="foot">The investor is paid <strong>$35,000 of principal</strong> every year, plus a dividend that shrinks as equity is bought back. Equity goes from 20% in Year 4 to 0% in Year 13.</p>
+    </figure>
+    <div class="two">
+      <div class="rv"><h3>For the Investor</h3><p>They make a clear profit. Instead of just getting their $350,000 back over time, they walk away with <strong>$570,000 total</strong> (a <strong>$220,000 net profit</strong> / ~63% total ROI). They also get 3 years to let the business mature without rushing it.</p></div>
+      <div class="rv"><h3>For The Founder</h3><p>They get a 3-year "breathing room" period to grow the business utilizing cash without immediate debt pressure. As they pay investment out, they slowly <strong>buy back 100% control</strong> of the company out of its own profits, leaving owners completely debt-free and equity-free by Year 13.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- The ground -->
+<section class="scene ground" id="ground">
+  <div class="px" data-speed="0.08"><img src="img/site1.jpg" alt="Cleared hillside at the project site" width="1600" height="1200" loading="lazy"></div>
+  <div class="shade"></div>
+  <div class="in">
+    <div class="slate rv">The ground</div>
+    <h2 class="quote rv">If you build it, they will come!</h2>
+    <p class="mono rv">Field Of Dreams (1989)</p>
+    <div class="facts">
+      <div class="rv"><p class="n tn">4300’</p><p class="mono">Elevation</p></div>
+      <div class="rv"><p class="n tn">100,000</p><p class="mono">Cubic yard stockpile of dirt</p></div>
+      <div class="rv"><p class="n">TPZ</p><p class="mono">Current zoning</p></div>
+    </div>
+    <p class="lead rv">An elevation of 4300’ makes for dense forest and fresh air, and with a 100,000 cubic yard stockpile of dirt, we have the opportunity for greatness.  Currently zoned TPZ, our allowed uses include recreation and camping with a conditional use permit.</p>
+    <div class="duo" style="margin-top:48px">
+      <figure class="wipe"><img src="img/site1.jpg" alt="Project site, cleared hillside" width="1600" height="1200" loading="lazy"><figcaption>Actual project site</figcaption></figure>
+      <figure class="wide"><img src="img/site2.jpg" alt="Project site, grassy slope with pines" width="1600" height="1200" loading="lazy"><figcaption>Actual project site</figcaption></figure>
+    </div>
+    <p class="mono" style="margin-top:22px">39.23119° N, 120.75741° W</p>
+  </div>
+</section>
+
+<section class="scene end">
+  <div class="px" data-speed="0.08"><img src="img/night.jpg" alt="Bike park lit by stadium lights at night" width="1195" height="896" loading="lazy"></div>
+  <div class="shade"></div>
+  <div class="in">
+    <img class="logo" src="img/logo.png" alt="DreamPark" width="634" height="132" loading="lazy">
+    <h2>Thank you.</h2>
+  </div>
+</section>
+</main>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var par = [].slice.call(document.querySelectorAll('[data-speed]'));
+  var pins = [].slice.call(document.querySelectorAll('.pin'));
+  var bar = document.getElementById('sp');
+  var queued = false;
+
+  function frame(){
+    queued = false;
+    var h = window.innerHeight, y = window.scrollY || 0;
+    var max = document.documentElement.scrollHeight - h;
+    bar.style.setProperty('--sp', max > 0 ? Math.min(1, y / max).toFixed(4) : 0);
+    if (reduce) return;
+    for (var i = 0; i < par.length; i++){
+      var el = par[i], host = el.parentElement.getBoundingClientRect();
+      if (host.bottom < -250 || host.top > h + 250) continue;
+      var c = host.top + host.height / 2 - h / 2;
+      el.style.transform = 'translate3d(0,' + (-c * parseFloat(el.getAttribute('data-speed'))).toFixed(1) + 'px,0)';
+    }
+    for (var j = 0; j < pins.length; j++){
+      var r = pins[j].getBoundingClientRect();
+      var span = r.height - h;
+      var t = span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 0;
+      pins[j].style.setProperty('--p', t.toFixed(4));
+    }
+  }
+  function queue(){ if (!queued){ queued = true; requestAnimationFrame(frame); } }
+  addEventListener('scroll', queue, {passive:true});
+  addEventListener('resize', queue);
+  frame();
+
+  if (!reduce && 'IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var el = e.target, to = parseFloat(el.getAttribute('data-count')), pre = el.getAttribute('data-pre') || '';
+        var t0 = performance.now(), dur = 1700;
+        (function step(t){
+          var k = Math.min(1, (t - t0) / dur), ease = 1 - Math.pow(1 - k, 3);
+          el.textContent = pre + Math.round(to * ease).toLocaleString('en-US');
+          if (k < 1) requestAnimationFrame(step);
+        })(t0);
+      });
+    }, {threshold: 0.6});
+    [].forEach.call(document.querySelectorAll('[data-count]'), function(el){ io.observe(el); });
+  }
+})();
+</script>
