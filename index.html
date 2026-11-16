@@ -70,14 +70,6 @@ p{margin:0}
 .tow .layer img.fill{filter:blur(32px) brightness(.5) saturate(1.2);transform:scale(1.25)}
 .tow .layer img.main{transform:scale(calc(1 + var(--p,0)*.22));transform-origin:50% 62%}
 @media (min-aspect-ratio:1/1){.tow .layer img.main{object-fit:contain;object-position:78% 50%}}
-.towphoto{display:none}
-.towafter{margin:0}
-.towafter img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
-@media (min-aspect-ratio:1/1){
-  .towafter{display:none}
-  .tow .towphoto{display:block;position:absolute;z-index:1;left:calc(max(0px,(100% - 1240px)/2) + max(16px,env(safe-area-inset-left,0px)));top:clamp(20px,4svh,48px);width:min(47vw,720px);margin:0;box-shadow:0 24px 60px rgba(0,0,0,.5);border:1px solid rgba(236,231,218,.18);transform:translateY(calc(var(--p,0)*-24px))}
-  .tow .towphoto img{display:block;width:100%;aspect-ratio:1290/1086;max-height:40svh;object-fit:cover;object-position:50% 58%}
-}
 .tow .shade{background:linear-gradient(to top,rgba(11,16,14,.9) 6%,rgba(11,16,14,.1) 62%)}
 .lights .day{filter:brightness(calc(1 - var(--p,0)*.55)) saturate(calc(1 - var(--p,0)*.4))}
 .lights .night{opacity:calc(var(--p,0)*1.7 - .35)}
@@ -93,11 +85,7 @@ p{margin:0}
 .bleed{height:clamp(320px,56vw,720px);margin:0}
 .bleed .px{inset:-12% 0}
 .show figcaption{position:absolute;left:max(16px,env(safe-area-inset-left,0px));bottom:16px;z-index:2;padding:6px 12px;background:var(--veil);font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-block:14px}
-.pair figure{position:relative;margin:0;overflow:hidden}
-.pair img{width:100%;aspect-ratio:4/3;object-fit:cover}
 .showcap{padding-block:18px clamp(40px,6vw,72px)}
-@media (max-width:820px){.pair{grid-template-columns:minmax(0,1fr)}}
 
 .band{padding-block:clamp(72px,11vw,150px);background:var(--ink)}
 .band.alt{background:var(--pine)}
@@ -113,11 +101,6 @@ p{margin:0}
 .stack.flow .b{position:static;width:100%;right:auto;left:auto;bottom:auto;border:0;box-shadow:none}
 .ar-43{aspect-ratio:4/3}.ar-32{aspect-ratio:3/2}.ar-169{aspect-ratio:16/9}.ar-45{aspect-ratio:4/5}.ar-23{aspect-ratio:2/3}
 
-.marquee{overflow:hidden;border-block:1px solid var(--line);padding-block:18px;background:var(--ink)}
-.marquee .track{display:flex;gap:48px;width:max-content;animation:mq 34s linear infinite}
-.marquee span{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:clamp(32px,5vw,64px);line-height:1;white-space:nowrap;color:var(--bone)}
-.marquee span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--fog)}
-@keyframes mq{to{transform:translateX(-50%)}}
 .events{min-height:92svh;display:flex;align-items:flex-end;padding-block:120px 64px}
 .events .shade{background:linear-gradient(to top,rgba(11,16,14,.92) 6%,rgba(11,16,14,.15) 60%)}
 
@@ -375,7 +358,7 @@ p{margin:0}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
-  .hero .px img,.marquee .track,.load .fill,.cue::after{animation:none}
+  .hero .px img,.load .fill,.cue::after{animation:none}
   .pin{height:auto}.stage{position:relative}
 }
 
@@ -429,7 +412,6 @@ p{margin:0}
       <img class="main" src="img/tow.jpg" alt="Rider’s view holding a blue tow rope up a forest trail" width="1162" height="2048">
     </div>
     <div class="shade"></div>
-    <figure class="towphoto"><img src="img/twilight.jpg" alt="Mountain bike park at twilight with a rope tow, stadium lights and riders on the trails" width="1290" height="1086" loading="lazy"></figure>
     <div class="cap"><div class="in">
       <div class="slate">The ride</div>
       <h2 class="h2">Tow-Rope</h2>
@@ -437,7 +419,6 @@ p{margin:0}
     </div></div>
   </div>
 </section>
-<figure class="towafter"><img src="img/twilight.jpg" alt="Mountain bike park at twilight with a rope tow, stadium lights and riders on the trails" width="1290" height="1086" loading="lazy"></figure>
 
 <section class="pin lights" id="lights">
   <div class="stage">
@@ -476,23 +457,12 @@ p{margin:0}
   <figure class="snackfull"><img src="img/interior.jpg" alt="Open shipping container with a counter and bar stools" width="942" height="706" loading="lazy"></figure>
 </section>
 
-<div class="marquee" aria-hidden="true">
-  <div class="track">
-    <span>Big Air</span><span>Slalom Racing</span><span>Community</span><span>Industry</span><span>Athletes</span>
-    <span>Big Air</span><span>Slalom Racing</span><span>Community</span><span>Industry</span><span>Athletes</span>
-  </div>
-</div>
-
 <section class="show" id="showcase">
   <div class="in head">
     <div class="slate rv">The vision</div>
     <h2 class="h2 rv">Youth and adult Freeride, Big Air, and Race Events</h2>
   </div>
   <figure class="scene bleed"><div class="px" data-speed="0.06"><img src="img/evt_mountains.jpg" alt="Rider flipping above a mountain bike park with wooden ramps and mountains behind" width="1500" height="1001" loading="lazy" style="object-position:50% 4%"></div><figcaption>Jump lines</figcaption></figure>
-  <div class="pair">
-    <figure><img src="img/evt_jump.jpg" alt="Rider soaring over a large dirt gap jump in a bike park at golden hour" width="988" height="1238" loading="lazy" style="object-position:50% 40%"><figcaption>Big air</figcaption></figure>
-    <figure><img src="img/evt_tower.jpg" alt="Rider flipping above a dirt jump with a tall event tower beside it" width="678" height="452" loading="lazy" style="object-position:30% 50%"></figure>
-  </div>
   <figure class="scene bleed"><div class="px" data-speed="0.06"><img src="img/evt_festival.jpg" alt="Crowd in camp chairs watching a band on a wooden stage in the forest" width="1800" height="1053" loading="lazy" style="object-position:35% 40%"></div><figcaption>Community</figcaption></figure>
   <figure class="scene bleed"><div class="px" data-speed="0.06"><img src="img/festival.jpg" alt="Crowd under string lights at an evening festival" width="1800" height="1007" loading="lazy"></div></figure>
   <div class="in"><p class="mono showcap">Inspiration photos from other bike parks and events.</p></div>
