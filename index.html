@@ -70,6 +70,14 @@ p{margin:0}
 .tow .layer img.fill{filter:blur(32px) brightness(.5) saturate(1.2);transform:scale(1.25)}
 .tow .layer img.main{transform:scale(calc(1 + var(--p,0)*.22));transform-origin:50% 62%}
 @media (min-aspect-ratio:1/1){.tow .layer img.main{object-fit:contain;object-position:78% 50%}}
+.towphoto{display:none}
+.towafter{margin:0}
+.towafter img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+@media (min-aspect-ratio:1/1){
+  .towafter{display:none}
+  .tow .towphoto{display:block;position:absolute;z-index:1;left:calc(max(0px,(100% - 1240px)/2) + max(16px,env(safe-area-inset-left,0px)));top:clamp(20px,4svh,48px);width:min(47vw,720px);margin:0;box-shadow:0 24px 60px rgba(0,0,0,.5);border:1px solid rgba(236,231,218,.18);transform:translateY(calc(var(--p,0)*-24px))}
+  .tow .towphoto img{display:block;width:100%;aspect-ratio:1290/1086;max-height:40svh;object-fit:cover;object-position:50% 58%}
+}
 .tow .shade{background:linear-gradient(to top,rgba(11,16,14,.9) 6%,rgba(11,16,14,.1) 62%)}
 .lights .day{filter:brightness(calc(1 - var(--p,0)*.55)) saturate(calc(1 - var(--p,0)*.4))}
 .lights .night{opacity:calc(var(--p,0)*1.7 - .35)}
@@ -80,8 +88,10 @@ p{margin:0}
 .snackfull{margin:clamp(32px,5vw,64px) 0 0}
 .snackfull img{width:100%;aspect-ratio:4/3;object-fit:cover}
 @media (min-width:821px){.snackfull img{aspect-ratio:16/9;max-height:86svh}}
-.snacktrailer{max-width:380px;margin:14px 0 0}
-.snackcab2{margin-bottom:clamp(72px,11vw,150px)}
+.cabpair{display:grid;grid-template-columns:minmax(0,1fr);gap:6px;margin:clamp(28px,4vw,48px) 0 clamp(72px,11vw,150px)}
+.cabpair figure{margin:0;overflow:hidden}
+.cabpair img{width:100%;aspect-ratio:4/5;object-fit:cover}
+@media (min-width:821px){.cabpair{grid-template-columns:repeat(2,minmax(0,1fr))}.cabpair img{aspect-ratio:1/1;max-height:92svh}}
 .show{background:var(--ink);padding-top:clamp(72px,11vw,150px)}
 .show .head{margin-bottom:clamp(32px,5vw,64px)}
 .bleed{height:clamp(320px,56vw,720px);margin:0}
@@ -148,7 +158,7 @@ p{margin:0}
 .chart{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,2vw,28px);align-items:end;height:340px;border-bottom:1px solid var(--line)}
 .col{display:flex;flex-direction:column;justify-content:flex-end;height:100%;min-width:0}
 .col .v{font-family:var(--mono);font-size:clamp(11px,1.8vw,15px);margin-bottom:8px;white-space:nowrap}
-.col .bar{height:calc((100% - 30px)*var(--h));background:linear-gradient(to top,rgba(255,181,82,.5),var(--amber));transform-origin:bottom}
+.col .bar{height:calc((100% - 30px)*var(--h));background:linear-gradient(to top,rgba(106,166,216,.45),#6aa6d8);transform-origin:bottom}
 .yrs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,2vw,28px);margin-top:10px}
 .yrs span{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:20px;letter-spacing:.04em}
 
@@ -182,8 +192,8 @@ p{margin:0}
 .payout .pyrs li{display:grid;grid-template-columns:6.7em minmax(0,1fr) 5em;align-items:center;gap:10px}
 .payout .y{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:24px;line-height:1;letter-spacing:.03em;white-space:nowrap}
 .payout .y small{display:block;font-family:var(--mono);font-weight:500;font-size:13px;letter-spacing:.02em;text-transform:none;color:var(--amber);margin-top:4px}
-.payout .bar{display:flex;height:34px;width:calc(var(--t) / 76 * 100%);min-width:0}
-.payout .bar .pr{flex:0 0 calc(40 / var(--t) * 100%)}
+.payout .bar{display:flex;height:34px;width:calc(var(--t) / 85 * 100%);min-width:0}
+.payout .bar .pr{flex:0 0 calc(45 / var(--t) * 100%)}
 .payout .bar .dv{flex:1 1 0}
 .payout .tot{font-family:var(--mono);font-weight:500;font-size:16px;text-align:right;font-variant-numeric:tabular-nums}
 .payout .foot{margin-top:22px;color:var(--fog);font-size:18px;max-width:34em}
@@ -193,8 +203,8 @@ p{margin:0}
   .payout .pyrs{grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:clamp(8px,1.6vw,22px);height:440px}
   .payout .pyrs li{display:flex;flex-direction:column;justify-content:flex-end;align-items:stretch;gap:10px;height:100%}
   .payout .tot{order:1;text-align:center;font-size:clamp(14px,1.5vw,19px)}
-  .payout .bar{order:2;flex-direction:column-reverse;width:100%;height:calc(var(--t) / 76 * 300px)}
-  .payout .bar .pr{flex:0 0 calc(40 / var(--t) * 100%)}
+  .payout .bar{order:2;flex-direction:column-reverse;width:100%;height:calc(var(--t) / 85 * 300px)}
+  .payout .bar .pr{flex:0 0 calc(45 / var(--t) * 100%)}
   .payout .y{order:3;text-align:center;font-size:clamp(18px,2vw,26px);min-height:3.2em}
   .payout .y small{font-size:clamp(11px,1.1vw,14px)}
   .payout .pyrs{border-bottom:1px solid var(--line);padding-bottom:0}
@@ -319,7 +329,6 @@ p{margin:0}
 #calc .layout{margin-top:clamp(28px,4vw,48px)}
 
 /* light trail + text spotlight */
-#trail{position:fixed;left:0;top:0;width:100vw;height:100vh;height:100dvh;pointer-events:none;z-index:25;mix-blend-mode:screen}
 @media (prefers-reduced-motion:no-preference){
   .h2,.lead,.slate{transition:scale .8s cubic-bezier(.2,.7,.2,1),text-shadow .7s ease}
   .h2.lit,.lead.lit{scale:var(--ls,1.1);text-shadow:0 0 30px rgba(255,181,82,.42)}
@@ -430,6 +439,7 @@ p{margin:0}
       <img class="main" src="img/tow.jpg" alt="Rider’s view holding a blue tow rope up a forest trail" width="1162" height="2048">
     </div>
     <div class="shade"></div>
+    <figure class="towphoto"><img src="img/twilight.jpg" alt="Mountain bike park at twilight with a rope tow, stadium lights and riders on the trails" width="1290" height="1086" loading="lazy"></figure>
     <div class="cap"><div class="in">
       <div class="slate">The ride</div>
       <h2 class="h2">Tow-Rope</h2>
@@ -437,6 +447,7 @@ p{margin:0}
     </div></div>
   </div>
 </section>
+<figure class="towafter"><img src="img/twilight.jpg" alt="Mountain bike park at twilight with a rope tow, stadium lights and riders on the trails" width="1290" height="1086" loading="lazy"></figure>
 
 <section class="pin lights" id="lights">
   <div class="stage">
@@ -476,8 +487,11 @@ p{margin:0}
   <div class="in" style="padding-top:clamp(64px,9vw,120px)">
     <h2 class="h2 rv">Cabin Rentals</h2>
     <p class="lead rv" style="margin-top:20px">For those who want to splurge, we offer extended stays in our Modified Container Cabins!</p>
-    <div style="height:24px"></div>
-  <figure class="frame snacktrailer"><img src="img/cabin_aframe.jpg" alt="Dark container cabin with a tall glass A-frame, wooden deck and fire pit in the pines" width="335" height="597" loading="lazy"></figure><figure class="frame snacktrailer snackcab2"><img src="img/cabin_tiny.jpg" alt="Small dark container cabin with large windows and a wooden deck in the forest" width="351" height="351" loading="lazy"></figure></div>
+  </div>
+  <div class="cabpair">
+    <figure><img src="img/cabin_aframe.jpg" alt="Dark container cabin with a tall glass A-frame, wooden deck and fire pit in the pines" width="670" height="1194" loading="lazy" style="object-position:50% 58%"></figure>
+    <figure><img src="img/cabin_tiny.jpg" alt="Small dark container cabin with large windows and a wooden deck in the forest" width="702" height="702" loading="lazy"></figure>
+  </div>
 </section>
 
 <div class="marquee" aria-hidden="true">
@@ -494,9 +508,10 @@ p{margin:0}
   </div>
   <figure class="scene bleed"><div class="px" data-speed="0.06"><img src="img/evt_mountains.jpg" alt="Rider flipping above a mountain bike park with wooden ramps and mountains behind" width="1500" height="1001" loading="lazy" style="object-position:50% 4%"></div><figcaption>Jump lines</figcaption></figure>
   <div class="pair">
-    <figure><img src="img/evt_flip.jpg" alt="Rider upside down in a backflip over dirt jumps beside an event tower" width="1333" height="1000" loading="lazy" style="object-position:40% 50%"><figcaption>Big air</figcaption></figure>
-    <figure><img src="img/evt_tower.jpg" alt="Rider flipping above a dirt jump with a tall event tower beside it" width="678" height="452" loading="lazy" style="object-position:30% 50%"><figcaption>Event day</figcaption></figure>
+    <figure><img src="img/evt_jump.jpg" alt="Rider soaring over a large dirt gap jump in a bike park at golden hour" width="988" height="1238" loading="lazy" style="object-position:50% 40%"><figcaption>Big air</figcaption></figure>
+    <figure><img src="img/evt_tower.jpg" alt="Rider flipping above a dirt jump with a tall event tower beside it" width="678" height="452" loading="lazy" style="object-position:30% 50%"></figure>
   </div>
+  <figure class="scene bleed"><div class="px" data-speed="0.06"><img src="img/kids.jpg" alt="Kids laughing on mountain bikes" width="1000" height="571" loading="lazy" style="object-position:50% 40%"></div><figcaption>Youth riders</figcaption></figure>
   <figure class="scene bleed"><div class="px" data-speed="0.06"><img src="img/evt_festival.jpg" alt="Crowd in camp chairs watching a band on a wooden stage in the forest" width="1800" height="1053" loading="lazy" style="object-position:35% 40%"></div><figcaption>Community</figcaption></figure>
   <figure class="scene bleed"><div class="px" data-speed="0.06"><img src="img/festival.jpg" alt="Crowd under string lights at an evening festival" width="1800" height="1007" loading="lazy"></div></figure>
   <div class="in"><p class="mono showcap">Inspiration photos from other bike parks and events.</p></div>
@@ -509,7 +524,6 @@ p{margin:0}
     <div class="trio">
       <figure class="t1"><img class="ar-43" src="img/playground.jpg" alt="Log obstacle course playground" width="600" height="450" loading="lazy"></figure>
       <figure class="t2"><img class="ar-23" src="img/dogtrail.jpg" alt="Walker and dog on a forest trail" width="415" height="739" loading="lazy"></figure>
-      <figure class="t3"><img class="ar-169" src="img/kids.jpg" alt="Kids laughing on mountain bikes" width="1000" height="571" loading="lazy"></figure>
     </div>
   </div>
 </section>
@@ -559,11 +573,11 @@ p{margin:0}
     <div class="cols">
       <div>
         <p class="mono rv" style="margin-bottom:16px">Estimated revenue</p>
-        <div class="chart" role="img" aria-label="Estimated revenue by year: Year 1 187,750 dollars, Year 2 275,375, Year 3 355,650, Year 4 402,250">
-          <div class="col"><span class="v tn" data-count="187750" data-pre="$">$187,750</span><div class="bar growy" style="--h:.467"></div></div>
-          <div class="col"><span class="v tn" data-count="275375" data-pre="$">$275,375</span><div class="bar growy" style="--h:.685"></div></div>
-          <div class="col"><span class="v tn" data-count="355650" data-pre="$">$355,650</span><div class="bar growy" style="--h:.884"></div></div>
-          <div class="col"><span class="v tn" data-count="402250" data-pre="$">$402,250</span><div class="bar growy" style="--h:1"></div></div>
+        <div class="chart" role="img" aria-label="Estimated revenue by year: Year 1 187,750 dollars, Year 2 225,300, Year 3 247,830, Year 4 247,830">
+          <div class="col"><span class="v tn" data-count="187750" data-pre="$">$187,750</span><div class="bar growy" style="--h:.758"></div></div>
+          <div class="col"><span class="v tn" data-count="225300" data-pre="$">$225,300</span><div class="bar growy" style="--h:.909"></div></div>
+          <div class="col"><span class="v tn" data-count="247830" data-pre="$">$247,830</span><div class="bar growy" style="--h:1"></div></div>
+          <div class="col"><span class="v tn" data-count="247830" data-pre="$">$247,830</span><div class="bar growy" style="--h:1"></div></div>
         </div>
         <div class="yrs"><span>Year 1</span><span>Year 2</span><span>Year 3</span><span>Year 4</span></div>
       </div>
@@ -588,23 +602,19 @@ p{margin:0}
   <div class="in">
     <div class="slate rv">Test the numbers</div>
     <h2 class="h2 rv">Sales Calculator</h2>
-    <p class="lead rv" style="margin-top:22px">Change prices and customer counts to see yearly revenue. Phase 1 starts at the Year 1 plan of $187,750. Phase 2 add-ons (the e-bikes and the tiny home) start switched off.</p>
+    <p class="lead rv" style="margin-top:22px">Change prices and customer counts to see yearly revenue. Phase 2 add-ons (the e-bikes and the tiny home) start switched off.</p>
     <div class="layout">
       <aside class="side" aria-label="Results">
         <section class="sum" aria-live="polite">
           <span class="lbl">Yearly revenue</span>
           <p class="total tn" id="total">$0</p>
           <p class="sub tn" id="monthly"></p>
-          <span class="pill flat tn" id="delta"></span>
-          <p class="ctx" id="ctx"></p>
           <h2>By phase</h2>
           <ul class="cmp" id="phs"></ul>
           <h2>Where it comes from</h2>
           <div class="stack" id="stack" aria-hidden="true"></div>
           <ul class="legend" id="legend"></ul>
-          <h2>Compared with the plan</h2>
-          <ul class="cmp" id="cmp"></ul>
-          <p class="note">Starting prices and customer counts are example assumptions chosen to match the plan's yearly totals. Replace them with your own.</p>
+          <p class="note">Starting prices and customer counts are example assumptions. Replace them with your own.</p>
         </section>
         <section class="panel" aria-label="Quick changes">
           <h2>Quick changes</h2>
@@ -629,22 +639,21 @@ p{margin:0}
   </div>
   <div class="dock" aria-hidden="true">
     <div><span class="lbl">Yearly revenue</span><b class="tn" id="dockTotal">$0</b></div>
-    <span class="pill flat tn" id="dockDelta"></span>
   </div>
 </section>
 
 <section class="band alt" id="money">
   <div class="in">
     <h2 class="h2 rv">Start-Up Costs</h2>
-    <p class="lead rv" style="margin-top:22px">We are seeking <strong style="color:var(--amber);font-weight:600">200k</strong> of outside capital to fund this project</p>
+    <p class="lead rv" style="margin-top:22px">We are seeking <strong style="color:var(--amber);font-weight:600">225k</strong> of outside capital to fund this project</p>
     <div class="cols" style="margin-top:44px">
       <div>
         <div class="tier">
-          <h3 class="rv">First 50k Investment</h3>
+          <h3 class="rv">First 75k Investment</h3>
           <ul class="rows">
             <li><span>Marketing, Software, Subscriptions</span><span class="t"><i class="grow" style="--w:3.3%"></i></span><b>5k</b></li>
             <li><span>Equipment Rental, Misc. Materials</span><span class="t"><i class="grow" style="--w:13.3%"></i></span><b>20k</b></li>
-            <li><span>Insurance, Staff, Misc. Overhead</span><span class="t"><i class="grow" style="--w:16.7%"></i></span><b>25k</b></li>
+            <li><span>Insurance, Staff, Misc. Overhead</span><span class="t"><i class="grow" style="--w:33.3%"></i></span><b>50k</b></li>
           </ul>
         </div>
         <div class="tier">
@@ -672,9 +681,9 @@ p{margin:0}
   <div class="in">
     <h2 class="h2 rv">Return On Investment</h2>
     <div class="money">
-      <div><p class="mono">Principal returned</p><p class="n tn" data-count="200000" data-pre="$">$200,000</p></div>
-      <div class="hot"><p class="mono">Net profit</p><p class="n tn" data-count="126000" data-pre="$">$126,000</p></div>
-      <div><p class="mono">Total, ~63% ROI</p><p class="n tn" data-count="326000" data-pre="$">$326,000</p></div>
+      <div><p class="mono">Principal returned</p><p class="n tn" data-count="225000" data-pre="$">$225,000</p></div>
+      <div class="hot"><p class="mono">Net profit</p><p class="n tn" data-count="142000" data-pre="$">$142,000</p></div>
+      <div><p class="mono">Total, ~63% ROI</p><p class="n tn" data-count="367000" data-pre="$">$367,000</p></div>
     </div>
     <figure class="payout">
       <div class="ph">
@@ -683,10 +692,10 @@ p{margin:0}
           <h3><span style="white-space:nowrap">Year 1:</span> Growth &amp; Grace Period</h3>
           <p class="lead" style="margin-bottom:16px">This first year covers:</p>
           <ul class="gl">
-            <li>Investor provides $200k capital.</li>
+            <li>Investor provides $225k capital.</li>
             <li>Business develops product/market.</li>
             <li>Business establishes operations.</li>
-            <li>Investor equity stays at 12%.</li>
+            <li>Investor equity stays at 13.5%.</li>
           </ul>
         </div>
       </div>
@@ -696,16 +705,16 @@ p{margin:0}
         <li><i class="dv"></i>Dividend payout</li>
       </ul>
       <ol class="pyrs" aria-label="Investor payout by year, in dollars">
-        <li style="--t:76"><span class="y">Year 2<small>12% equity</small></span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$76,000</b></li>
-        <li style="--t:72"><span class="y">Year 3</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$72,000</b></li>
-        <li style="--t:66"><span class="y">Year 4</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$66,000</b></li>
-        <li style="--t:60"><span class="y">Year 5</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$60,000</b></li>
-        <li style="--t:52"><span class="y">Year 6<small>0% equity</small></span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$52,000</b></li>
+        <li style="--t:85"><span class="y">Year 2<small>13.5% equity</small></span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$85,000</b></li>
+        <li style="--t:81"><span class="y">Year 3</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$81,000</b></li>
+        <li style="--t:75"><span class="y">Year 4</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$75,000</b></li>
+        <li style="--t:67"><span class="y">Year 5</span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$67,000</b></li>
+        <li style="--t:59"><span class="y">Year 6<small>0% equity</small></span><span class="bar"><i class="pr"></i><i class="dv"></i></span><b class="tot">$59,000</b></li>
       </ol>
-      <p class="foot">The investor is paid <strong>$40,000 of principal</strong> every year, plus a dividend that shrinks as equity is bought back. Equity goes from 12% in Year 2 to 0% in Year 6, so the investment is fully paid back <strong>seven years sooner</strong> than the original plan.</p>
+      <p class="foot">The investor is paid <strong>$45,000 of principal</strong> every year, plus a dividend that shrinks as equity is bought back.</p>
     </figure>
     <div class="two">
-      <div class="rv"><h3>For the Investor</h3><p>They make a clear profit. Instead of just getting their $200,000 back over time, they walk away with <strong>$326,000 total</strong> (a <strong>$126,000 net profit</strong> / ~63% total ROI), fully paid back by Year 6. They also get a full year to let the business open and settle in.</p></div>
+      <div class="rv"><h3>For the Investor</h3><p>They make a clear profit. Instead of just getting their $225,000 back over time, they walk away with <strong>$367,000 total</strong> (a <strong>$142,000 net profit</strong> / ~63% total ROI), fully paid back by Year 6. They also get a full year to let the business open and settle in.</p></div>
       <div class="rv"><h3>For The Founder</h3><p>They get a 1-year "breathing room" period to grow the business utilizing cash without immediate debt pressure. As they pay investment out, they slowly <strong>buy back 100% control</strong> of the company out of its own profits, leaving owners completely debt-free and equity-free by Year 6.</p></div>
     </div>
   </div>
@@ -796,12 +805,8 @@ p{margin:0}
 <script>
 (function(){
   if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var cv=document.createElement('canvas'); cv.id='trail'; cv.setAttribute('aria-hidden','true');
-  document.body.appendChild(cv);
-  var ctx=cv.getContext('2d'), W=0,H=0;
-  function size(){var d=Math.min(window.devicePixelRatio||1,2);W=window.innerWidth;H=window.innerHeight;cv.width=W*d;cv.height=H*d;ctx.setTransform(d,0,0,d,0,0);}
-  size(); window.addEventListener('resize',size);
-
+  var W=window.innerWidth;
+  window.addEventListener('resize',function(){W=window.innerWidth;});
   // work out how much a piece of text can grow without running off the screen
   function fit(el){
     var max=el.classList.contains('slate')?1.18:(el.classList.contains('lead')?1.1:1.12);
@@ -817,84 +822,16 @@ p{margin:0}
     el.style.setProperty('--ls',sc.toFixed(3));
   }
   // text that is near the middle of the screen gets enlarged and glows
-  var lit=new Set();
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){
       es.forEach(function(e){
-        if(e.isIntersecting){fit(e.target);e.target.classList.add('lit');lit.add(e.target);}
-        else{e.target.classList.remove('lit');lit.delete(e.target);}
+        if(e.isIntersecting){fit(e.target);e.target.classList.add('lit');}
+        else{e.target.classList.remove('lit');}
       });
     },{rootMargin:'-30% 0px -34% 0px',threshold:0});
     [].forEach.call(document.querySelectorAll('main .h2, main .lead, main .slate'),function(el){io.observe(el);});
   }
 
-  var hx=W/2,hy=H*.6,vx=0,vy=0,lt=0,hist=[],last=0,activeUntil=0,running=false,orb=0,LIFE=3600;
-  function target(now){
-    var max=Math.max(1,document.documentElement.scrollHeight-H), y=window.scrollY;
-    var tx=W*(.5+.36*Math.sin(y/480)), ty=H*.62;
-    var best=null,bd=1e9;
-    lit.forEach(function(el){var r=el.getBoundingClientRect();var d=Math.abs((r.top+r.bottom)/2-H*.5);if(d<bd){bd=d;best=r;}});
-    if(best){
-      var k=.5+.5*Math.sin(y/260);
-      tx=best.left+(best.right-best.left)*k;
-      ty=Math.min(H-40,Math.max(60,best.bottom+12));
-    }
-    return [tx,ty];
-  }
-  function frame(now){
-    var t=target(now);
-    // the head carves like a bike in a berm: momentum swings it wide through each turn
-    var dt=lt?Math.min(3,(now-lt)/16.67):1; lt=now;
-    vx+=(t[0]-hx)*.0028*dt; vy+=(t[1]-hy)*.0028*dt;
-    var damp=Math.pow(.957,dt); vx*=damp; vy*=damp;
-    hx+=vx*dt; hy+=vy*dt;
-    var moving=now<activeUntil;
-    if(moving){
-      var l=hist[hist.length-1];
-      if(!l||Math.abs(l.x-hx)+Math.abs(l.y-hy)>2.5) hist.push({x:hx,y:hy,t:now});
-    }
-    while(hist.length&&now-hist[0].t>LIFE) hist.shift();
-    orb+=((moving?1:0)-orb)*.035;
-    ctx.clearRect(0,0,W,H);
-    if(orb>.02){
-      // wide flashlight beam that lights up the dark background around the streak
-      var R=Math.max(165,Math.min(W,H)*.42), spots=[[hx,hy,1]], n=hist.length, m;
-      for(m=1;m<=5&&n-1-m*4>=0;m++){var q=hist[n-1-m*4]; spots.push([q.x,q.y,1-m*.17]);}
-      for(m=spots.length-1;m>=0;m--){
-        var sp=spots[m], gg=ctx.createRadialGradient(sp[0],sp[1],0,sp[0],sp[1],R), k2=orb*sp[2]*(m?0.5:1);
-        gg.addColorStop(0,'rgba(255,252,242,'+(.19*k2).toFixed(3)+')');
-        gg.addColorStop(.3,'rgba(255,252,242,'+(.10*k2).toFixed(3)+')');
-        gg.addColorStop(.65,'rgba(255,252,242,'+(.03*k2).toFixed(3)+')');
-        gg.addColorStop(1,'rgba(255,252,242,0)');
-        ctx.fillStyle=gg; ctx.fillRect(sp[0]-R,sp[1]-R,R*2,R*2);
-      }
-    }
-    if(hist.length>1){
-      ctx.lineCap='round'; ctx.lineJoin='round';
-      for(var i=1;i<hist.length;i++){
-        var a=1-(now-hist[i].t)/LIFE; if(a<=0)continue;
-        var p0=hist[i-1],p1=hist[i],p2=hist[i+1]||hist[i];
-        var sx=(p0.x+p1.x)/2,sy=(p0.y+p1.y)/2,ex=(p1.x+p2.x)/2,ey=(p1.y+p2.y)/2;
-        var lw=.8+a*2.2;
-        ctx.beginPath(); ctx.moveTo(sx,sy); ctx.quadraticCurveTo(p1.x,p1.y,ex,ey);
-        ctx.strokeStyle='rgba(255,255,255,'+(a*.022).toFixed(3)+')'; ctx.lineWidth=lw*4.5; ctx.stroke();
-        ctx.strokeStyle='rgba(255,255,255,'+(a*.15).toFixed(3)+')'; ctx.lineWidth=lw; ctx.stroke();
-      }
-    }
-    if(orb>.02){
-      var g=ctx.createRadialGradient(hx,hy,0,hx,hy,38);
-      g.addColorStop(0,'rgba(255,255,255,'+(.17*orb).toFixed(3)+')');
-      g.addColorStop(.25,'rgba(255,255,255,'+(.09*orb).toFixed(3)+')');
-      g.addColorStop(1,'rgba(255,255,255,0)');
-      ctx.fillStyle=g; ctx.beginPath(); ctx.arc(hx,hy,38,0,6.2832); ctx.fill();
-    }
-    if(moving||hist.length||orb>.02) requestAnimationFrame(frame); else running=false;
-  }
-  function wake(){
-    activeUntil=performance.now()+3000;
-    if(!running){running=true;requestAnimationFrame(frame);}
-  }
-  window.addEventListener('scroll',wake,{passive:true});
 })();
 </script>
 <script>
@@ -923,11 +860,7 @@ p{margin:0}
     {id:'tiny', name:'Tiny home Airbnb', color:'#c9e08a', plan:'p2', ph:2, items:[
       {id:'tiny', name:'Airbnb tiny home cabin', pl:'Price per night', ql:'Nights booked per year', p:275, q:110, ps:5, qs:10, off:true}]}
   );
-  var PHASES = {1:{name:'Phase 1', sub:'Built with the $200k raise'}, 2:{name:'Phase 2', sub:'Paid for from park revenue. Not in the business plan, so these start switched off.'}};
-  var PLAN = {day:60000, camp:75000, less:35000, evt:17750, p2:0};
-  var PLAN_NAMES = {day:'Day passes / snack bar', camp:'Camping / cabins', less:'Lessons / camps', evt:'Events / sponsors', p2:'Phase 2 add-ons'};
-  var PLAN_TOTAL = 187750;
-  var PLAN_YEARS = [187750, 275375, 355650, 402250];
+  var PHASES = {1:{name:'Phase 1', sub:'Built with the $225k raise'}, 2:{name:'Phase 2', sub:'Paid for from park revenue. Not in the business plan, so these start switched off.'}};
   var KEY = 'dreampark-calc-v2';
 
   var state = {vol:100, prc:100, it:{}};
@@ -998,12 +931,12 @@ p{margin:0}
 
   function update(){
     var vm = state.vol/100, pm = state.prc/100;
-    var gtot = {}, ptot = {1:0,2:0}, plan = {day:0,camp:0,less:0,evt:0,p2:0}, total = 0;
+    var gtot = {}, ptot = {1:0,2:0}, total = 0;
     GROUPS.forEach(function(g){ gtot[g.id] = 0; });
     all.forEach(function(i){
       var s = state.it[i.id];
       var line = s.on ? (s.p*pm) * (s.q*vm) : 0;
-      gtot[i.group.id] += line; ptot[i.group.ph] += line; total += line; plan[i.group.plan] += line;
+      gtot[i.group.id] += line; ptot[i.group.ph] += line; total += line;
       var el = root.querySelector('[data-lt="'+i.id+'"]'); el.textContent = money(line);
       root.querySelector('.item[data-id="'+i.id+'"]').classList.toggle('off', !s.on);
       var eff = root.querySelector('[data-eff="'+i.id+'"]');
@@ -1012,15 +945,10 @@ p{margin:0}
     GROUPS.forEach(function(g){ root.querySelector('[data-gt="'+g.id+'"]').textContent = money(gtot[g.id]); });
 
     [1,2].forEach(function(n){ root.querySelector('[data-pt="'+n+'"]').textContent = money(ptot[n]); });
-    $('phs').innerHTML = [1,2].map(function(n){ return '<li><span class="n">'+PHASES[n].name+'</span><span class="d tn">'+money(ptot[n])+'</span></li>'; }).join('');
+    $('phs').innerHTML = [1,2].filter(function(n){ return ptot[n] > 0; }).map(function(n){ return '<li><span class="n">'+PHASES[n].name+'</span><span class="d tn">'+money(ptot[n])+'</span></li>'; }).join('');
     $('total').textContent = money(total);
     $('dockTotal').textContent = money(total);
     $('monthly').textContent = money(total/12) + ' per month on average';
-    var d = total - PLAN_TOTAL, pct = PLAN_TOTAL ? d/PLAN_TOTAL*100 : 0;
-    var cls = Math.abs(d) < 0.5 ? 'flat' : (d>0 ? 'good' : 'bad');
-    var txt = cls==='flat' ? 'On the Year 1 plan' : ((d>0?'▲ ':'▼ ') + signed(d) + ' (' + (d>0?'+':'-') + Math.abs(pct).toFixed(1) + '%) vs plan');
-    ['delta','dockDelta'].forEach(function(id){ var e=$(id); e.className='pill tn '+cls; e.textContent = (id==='dockDelta' && cls!=='flat') ? ((d>0?'▲ ':'▼ ')+ signed(d)) : txt; });
-    $('ctx').textContent = context(total);
 
     var stack = '', leg = '';
     GROUPS.forEach(function(g){
@@ -1030,24 +958,9 @@ p{margin:0}
     });
     $('stack').innerHTML = stack; $('legend').innerHTML = leg;
 
-    var cmp = '';
-    Object.keys(PLAN).forEach(function(k){
-      var dd = plan[k]-PLAN[k], c = Math.abs(dd)<0.5 ? 'flat' : (dd>0?'good':'bad');
-      cmp += '<li><span class="n">'+PLAN_NAMES[k]+'</span><span class="d tn '+c+'">'+(c==='flat'?'On plan':signed(dd))+'</span><span class="s tn">'+money(plan[k])+' now &middot; '+money(PLAN[k])+' plan</span></li>';
-    });
-    $('cmp').innerHTML = cmp;
     $('volOut').textContent = state.vol + '%'; $('prcOut').textContent = state.prc + '%';
     save();
   }
-  function context(t){
-    if (Math.abs(t-PLAN_YEARS[0])<0.5) return 'This matches the plan for Year 1.';
-    if (t < PLAN_YEARS[0]) return 'Below the Year 1 plan of ' + money(PLAN_YEARS[0]) + '.';
-    for (var n=1;n<PLAN_YEARS.length;n++){
-      if (t <= PLAN_YEARS[n]) return 'Above Year ' + n + ' of the plan (' + money(PLAN_YEARS[n-1]) + ') and below Year ' + (n+1) + ' (' + money(PLAN_YEARS[n]) + ').';
-    }
-    return 'Above the Year 4 plan of ' + money(PLAN_YEARS[3]) + '.';
-  }
-
   function setVal(id, f, v){
     var s = state.it[id]; s[f] = Math.max(0, isFinite(v)?v:0);
   }
