@@ -377,6 +377,42 @@ p{margin:0}
   .chart{height:300px}
   .cue{display:none}
   }
+
+/* operating costs & cash flow */
+.cf-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:clamp(28px,4vw,48px)}
+.cf-stat{border:1px solid var(--line);padding:18px;background:rgba(255,255,255,.03)}
+.cf-stat .mono{margin:0 0 10px}
+.cf-stat b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(30px,4vw,48px);line-height:1}
+.cf-stat small{display:block;margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--fog)}
+.cf-grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(24px,4vw,56px);margin-top:clamp(28px,4vw,48px);align-items:start}
+.cf-costs h3,.cf-out h3{font-family:var(--display);font-weight:800;text-transform:uppercase;font-size:22px;margin:0 0 6px}
+.cf-costs label{display:grid;grid-template-columns:minmax(0,1fr) 7.5em;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px;line-height:1.3}
+.cf-costs input{width:100%;box-sizing:border-box;background:#0b100e;color:#ece7da;border:1px solid var(--line);padding:10px 12px;font:600 16px var(--mono);text-align:right;border-radius:0}
+.cf-costs input:focus{outline:2px solid #ffb552;outline-offset:1px}
+.cf-costs .cf-sum{display:flex;justify-content:space-between;gap:12px;padding:14px 0 0;font-family:var(--mono);font-size:14px}
+.cf-costs .cf-sum b{color:#ffb552}
+.cf-costs .note{margin:14px 0 0;font-size:13px;color:var(--fog);line-height:1.5}
+.cf-chart{position:relative;height:250px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(6px,1.4vw,16px);margin-top:14px}
+.cf-chart::after{content:"";position:absolute;left:0;right:0;top:50%;border-top:1px solid rgba(169,183,173,.5)}
+.cf-chart .col{position:relative}
+.cf-chart .bar{position:absolute;left:10%;right:10%;background:#49b283}
+.cf-chart .bar.neg{background:#ff7a6b}
+.cf-chart .v{position:absolute;left:-4px;right:-4px;text-align:center;font:600 12px var(--mono);white-space:nowrap}
+.cf-yrs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(6px,1.4vw,16px);margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--fog);text-align:center}
+.cf-scroll{overflow-x:auto;margin-top:22px}
+.cf-table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px}
+.cf-table th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--fog);font-weight:500;padding:8px 6px;text-align:right;border-bottom:1px solid var(--line)}
+.cf-table td{padding:11px 6px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+.cf-table th:first-child,.cf-table td:first-child{text-align:left;padding-left:0}
+.cf-table .neg{color:#ff7a6b}.cf-table .pos{color:#49b283}
+.cf-msg{margin:22px 0 0;padding:16px 18px;border-left:3px solid #ffb552;background:rgba(255,181,82,.08);font-size:16px;line-height:1.5}
+.cf-msg.bad{border-color:#ff7a6b;background:rgba(255,122,107,.08)}
+.cf-msg.good{border-color:#49b283;background:rgba(73,178,131,.08)}
+@media (max-width:820px){
+  .cf-stats{grid-template-columns:minmax(0,1fr)}
+  .cf-grid{grid-template-columns:minmax(0,1fr)}
+  .cf-table{font-size:12px}.cf-table td{padding:10px 4px}.cf-table th{padding:8px 4px;font-size:10px;letter-spacing:.04em}
+}
 </style>
 
 <div id="sp" aria-hidden="true"></div>
@@ -670,6 +706,41 @@ p{margin:0}
   </div>
 </section>
 
+<section class="band alt" id="cash">
+  <div class="in">
+    <div class="slate rv">Can it pay for itself?</div>
+    <h2 class="h2 rv">Operating Costs &amp; Cash Flow</h2>
+    <p class="lead rv" style="margin-top:22px">Yearly revenue from the Sales Calculator, minus operating costs and the investor payments. Change any cost or any calculator number to test it.</p>
+    <div class="cf-stats" aria-live="polite">
+      <div class="cf-stat"><p class="mono">Operating costs per year</p><b class="tn" id="cfCost">$0</b></div>
+      <div class="cf-stat"><p class="mono">Year 1 left over</p><b class="tn" id="cfY1">$0</b><small>Grace year: no investor payment</small></div>
+      <div class="cf-stat"><p class="mono">Lowest cash balance</p><b class="tn" id="cfMin">$0</b><small id="cfMinN"></small></div>
+    </div>
+    <div class="cf-grid">
+      <div class="cf-costs">
+        <h3>Yearly operating costs</h3>
+        <div id="cfInputs"></div>
+        <div class="cf-sum"><span>Total</span><b class="tn" id="cfTot">$0</b></div>
+        <p class="note">Costs are held flat every year. Add food cost, trail maintenance, marketing, permits or software under “Other” to see how much room is left.</p>
+      </div>
+      <div class="cf-out">
+        <h3>Left over each year</h3>
+        <p class="note" style="margin:0;font-size:13px;color:#a9b7ad">Revenue minus costs minus the investor payment</p>
+        <div class="cf-chart" id="cfChart" role="img" aria-label="Money left over each year after costs and investor payments"></div>
+        <div class="cf-yrs" aria-hidden="true"><span>Yr 1</span><span>Yr 2</span><span>Yr 3</span><span>Yr 4</span><span>Yr 5</span><span>Yr 6</span></div>
+        <div class="cf-scroll">
+          <table class="cf-table">
+            <thead><tr><th>Year</th><th>Revenue</th><th>Costs</th><th>Investor</th><th>Left over</th><th>Cash saved</th></tr></thead>
+            <tbody id="cfRows"></tbody>
+          </table>
+        </div>
+        <p class="cf-msg" id="cfMsg"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- The ground -->
 <section class="scene ground" id="ground">
   <div class="px" data-speed="0.08"><img src="img/site1.jpg" alt="Cleared hillside at the project site" width="1600" height="1200" loading="lazy"></div>
@@ -897,6 +968,7 @@ p{margin:0}
     $('total').textContent = money(total);
     $('dockTotal').textContent = money(total);
     $('monthly').textContent = money(total/12) + ' per month on average';
+    window.DP_REV = total; document.dispatchEvent(new CustomEvent('dp-rev'));
 
     var stack = '', leg = '';
     GROUPS.forEach(function(g){
@@ -944,5 +1016,36 @@ p{margin:0}
 })();
 
 </script>
+
+<script>
+(function(){
+  var G=[1,1.2,1.32,1.32,1.32,1.32], PAY=[0,85000,81000,75000,67000,59000], KEY='dreampark-costs-v1';
+  var C=[{id:'staff',n:'Staff',v:75000},{id:'ins',n:'Insurance',v:8000},{id:'en',n:'Energy',v:4000},{id:'rent',n:'Rental equipment',v:12000},{id:'oth',n:'Other (food cost, maintenance, marketing)',v:0}];
+  try{ var sv=JSON.parse(localStorage.getItem(KEY)||'null'); if(sv) C.forEach(function(c){ if(typeof sv[c.id]==='number') c.v=sv[c.id]; }); }catch(e){}
+  function $(id){return document.getElementById(id);}
+  function m(n){ var r=Math.round(n); return (r<0?'-':'')+'$'+Math.abs(r).toLocaleString('en-US'); }
+  function k(n){ var r=Math.round(n/100)/10; return (r<0?'-':'')+'$'+Math.abs(r).toFixed(1)+'k'; }
+  var box=$('cfInputs'); if(!box) return;
+  box.innerHTML=C.map(function(c){ return '<label><span>'+c.n+'</span><input type="number" inputmode="numeric" min="0" step="500" data-c="'+c.id+'" value="'+c.v+'"></label>'; }).join('');
+  box.addEventListener('input',function(e){ var t=e.target; if(!t.dataset.c) return; C.forEach(function(c){ if(c.id===t.dataset.c) c.v=Math.max(0,parseFloat(t.value)||0); }); render(); try{ var o={}; C.forEach(function(c){o[c.id]=c.v;}); localStorage.setItem(KEY,JSON.stringify(o)); }catch(e2){} });
+  function render(){
+    var rev0=window.DP_REV||0, cost=C.reduce(function(a,c){return a+c.v;},0), cash=0, rows=[], min=Infinity, minY=1;
+    for(var i=0;i<6;i++){ var rev=rev0*G[i], left=rev-cost-PAY[i]; cash+=left; if(cash<min){min=cash;minY=i+1;} rows.push({y:i+1,rev:rev,pay:PAY[i],left:left,cash:cash}); }
+    $('cfTot').textContent=m(cost); $('cfCost').textContent=m(cost); $('cfY1').textContent=m(rows[0].left);
+    $('cfMin').textContent=m(min); $('cfMinN').textContent='In Year '+minY;
+    $('cfRows').innerHTML=rows.map(function(r){ return '<tr><td>Yr '+r.y+'</td><td>'+k(r.rev)+'</td><td>'+k(cost)+'</td><td>'+(r.pay?k(r.pay):'-')+'</td><td class="'+(r.left<0?'neg':'pos')+'">'+k(r.left)+'</td><td class="'+(r.cash<0?'neg':'')+'">'+k(r.cash)+'</td></tr>'; }).join('');
+    var mx=Math.max.apply(null,rows.map(function(r){return Math.abs(r.left);}).concat([1]));
+    $('cfChart').innerHTML=rows.map(function(r){ var h=Math.abs(r.left)/mx*44, pos=r.left>=0;
+      return '<div class="col"><i class="bar'+(pos?'':' neg')+'" style="'+(pos?'bottom':'top')+':50%;height:'+h+'%"></i><span class="v" style="'+(pos?'bottom':'top')+':calc(50% + '+h+'% + 4px);color:'+(pos?'#49b283':'#ff7a6b')+'">'+k(r.left)+'</span></div>'; }).join('');
+    var neg=rows.filter(function(r){return r.left<0;}), box2=$('cfMsg'), t, cls;
+    if(!neg.length){ t='Every year earns more than operating costs plus the investor payment.'; cls='good'; }
+    else if(min>=0){ t='In '+neg.map(function(r){return 'Year '+r.y;}).join(' and ')+', the investor payment is more than the park earns after costs (short by '+neg.map(function(r){return m(-r.left);}).join(' and ')+'). The Year 1 profit covers it, but the cash saved drops to a low of '+m(min)+' in Year '+minY+'. That leaves very little room for a slow season or surprise costs.'; cls=''; }
+    else { t='Cash runs short: the balance drops to '+m(min)+' in Year '+minY+'. You would need about '+m(-min)+' more from higher revenue, lower costs, or smaller early investor payments.'; cls='bad'; }
+    box2.className='cf-msg '+cls; box2.textContent=t;
+  }
+  document.addEventListener('dp-rev',render); render();
+})();
+</script>
+
 
 
